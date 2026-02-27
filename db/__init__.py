@@ -21,6 +21,9 @@ from .db import (
     
     # Database engine
     engine,
+
+    #Enums
+    PaperStatus,
 )
 
 from .manager import (
@@ -40,6 +43,7 @@ __all__ = [
     'SubjectMainSubjectLink',
     'SubjectParentLink',
     'engine',
+    'PaperStatus',
 ]
 
-__version__ = '1.0.0'
+__version__ = '1.0.1'

@@ -3,7 +3,7 @@ from db import engine, Paper, Author, Subject, MainSubject, SubjectParentLink
 from typing import List, Dict, Tuple
 
 class DatabaseManager:
-    """Manages database operations"""
+    """Manages ALL database operations"""
     def __init__(self):
         self.engine = engine
     
@@ -152,4 +152,3 @@ class DatabaseManager:
 
         return mapping.get(subject_name, subject_name.lower().replace(' ', '-'))
 
-print("hello")

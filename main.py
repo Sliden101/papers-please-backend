@@ -7,3 +7,4 @@ db_manager = DatabaseManager()
 
 db_manager.add_subjects_hierarchy(res)
 
+

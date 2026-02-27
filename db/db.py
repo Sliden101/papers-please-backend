@@ -1,5 +1,6 @@
-from sqlmodel import Field, Relationship, Session, SQLModel, create_engine
+from sqlmodel import Field, Relationship, Session, SQLModel, create_engine, Enum, Column
 from typing import Optional, List
+import enum
 
 #Link Tables
 
@@ -58,15 +59,29 @@ class Author(SQLModel, table=True):
     name: Optional[str] = Field(default=None, primary_key=True)
     papers: List["Paper"] = Relationship(back_populates="authors", link_model=PaperAuthorLink)
 
+class PaperStatus(str, enum.Enum): #Python built in Enum "type"
+    READING = "reading"
+    UNREAD = "unread"
+    COMPLETED = "completed"
+
 class Paper(SQLModel, table=True):
     __tablename__ = "paper"
     id: Optional[str] = Field(default=None, primary_key=True)
     title: str = Field(index=True)
     abstract: str = Field(default=None)
     doi: str = Field(default=None)
+    status: PaperStatus = Field(
+        sa_column=Column(
+                index=True,
+                name="status",
+                nullable=False,
+                type_ = Enum(PaperStatus),
+        )
+    )
+    note: str = Field(default = None)
     authors: List["Author"] = Relationship(back_populates="papers", link_model=PaperAuthorLink)
     subjects: List["Subject"] = Relationship(back_populates="papers", link_model=PaperSubjectLink)
-
+    
 # Database connection
 
 sqlite_file_name = "db/database.db"

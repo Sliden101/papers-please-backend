@@ -10,7 +10,12 @@ pkgs.mkShellNoCC {
       ps.beautifulsoup4
       ps.requests
       ps.uuid6
+      
+      ps.pylint
+      
     ]))
+
+
     curl
     jq
   ];
