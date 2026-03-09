@@ -1,7 +1,7 @@
 import requests
 from utils.scrapers import ArxivScraper
-from db import Paper as DBPaper, Author, Subject, PaperStatus, engine, PaperAuthorLink, PaperSubjectLink
 from sqlmodel import Session
+from db import Paper as DBPaper, Author, Subject, PaperStatus, engine, PaperAuthorLink, PaperSubjectLink
 
 class PaperManager():
     """Manages adding papers to the database"""

@@ -12,7 +12,7 @@ from .paper_scraper import (
 )
 
 __all__ = [
-    'scrape_arxiv_subjects_hierarchy'
+    'scrape_arxiv_subjects_hierarchy',
     'ArxivScraper'
 ]
 

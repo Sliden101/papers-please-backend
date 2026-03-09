@@ -1,20 +1,20 @@
-from sqlmodel import Session, select
-from db import engine, Paper, Author, Subject, MainSubject, SubjectParentLink
 from typing import List, Dict, Tuple
+from sqlmodel import SQLModel, Session, select
+from db import engine, Subject, MainSubject, SubjectParentLink
 
 class SubjectManager:
     """Manages subject database operations"""
     def __init__(self):
         self.engine = engine
     
-    def create_tables(self):
+    def create_tables(self) -> bool:
         """Create all database tables"""
         try:
             SQLModel.metadata.create_all(self.engine)
-            return true
+            return True
         except Exception as e:
-            printf("Exception raised {e}")
-    
+            print(f"Exception raised {e}")
+            return False
     def add_subjects_hierarchy(self, hierarchy: Dict[str, Dict[str, List[Tuple[str, str]]]]):
         """
         Add subjects hierarchy to database
@@ -71,7 +71,7 @@ class SubjectManager:
                     
             session.commit()
             
-            print(f"Added: ")
+            print("Added: ")
             print(f"{total_main} main categories")
             print(f"{total_subjects} subject areas")
             print(f"{total_categories} sub-categories")
@@ -125,7 +125,7 @@ class SubjectManager:
         if not existing_link and child.name != parent.name:
             child.parents.append(parent)
     
-    def _generate_shorthand(self, subject_name: str, main_category: str) -> str:
+    def _generate_shorthand(self, subject_name: str) -> str:
         """Generate shorthand for subject areas without one"""
         mapping = {
             'Astrophysics': 'astro-ph',

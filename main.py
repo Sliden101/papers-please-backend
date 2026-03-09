@@ -1,18 +1,9 @@
-from db import create_db_and_tables, Paper, Author, Subject, SubjectManager, PaperStatus, PaperManager
-from utils.scrapers import scrape_arxiv_subjects_hierarchy, ArxivScraper
 from fastapi import FastAPI
 from contextlib import asynccontextmanager
 import logging
 
 from routes import router
 
-
-def do_shit():
-    res = scrape_arxiv_subjects_hierarchy()
-
-    subject_manager = SubjectManager()
-
-    subject_manager.add_subjects_hierarchy(res)
 
 # main.py
 from fastapi import FastAPI

@@ -38,7 +38,7 @@ __all__ = [
     'create_db_and_tables',
     'create_db_session',
     'SubjectManager',
-    'PaperManager'
+    'PaperManager',
     'Paper',
     'Author',
     'Subject',

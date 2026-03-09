@@ -1,11 +1,11 @@
-from fastapi import FastAPI, APIRouter, HTTPException, Query
-from fastapi.responses import JSONResponse
-from pydantic import BaseModel, Field
 from typing import Optional, List, Dict, Any
-from contextlib import asynccontextmanager
+
 import logging
 
-from db import create_db_and_tables, Paper as DBPaper, Author, Subject, PaperStatus, engine
+from fastapi import FastAPI, APIRouter, HTTPException, Query
+from pydantic import BaseModel, Field
+
+from db import Paper as DBPaper, Author, Subject, PaperStatus, engine
 from db import PaperAuthorLink, PaperSubjectLink, PaperManager
 from sqlmodel import Session, select
 from sqlalchemy import func

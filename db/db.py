@@ -6,20 +6,28 @@ import enum
 #Link Tables
 
 class PaperAuthorLink(SQLModel, table=True):
-	paper_id: Optional[str]= Field(default=None, foreign_key="paper.id", primary_key=True)
-	author_name: Optional[str] = Field(default=None, foreign_key="author.name", primary_key=True)
+    paper_id: Optional[str]= Field(default=None, foreign_key="paper.id", primary_key=True)
+    author_name: Optional[str] = Field(default=None, foreign_key="author.name", primary_key=True)
 
 class PaperSubjectLink(SQLModel, table=True):
-	paper_id: Optional[str] = Field(default=None, foreign_key="paper.id", primary_key=True)
-	subject_name: Optional[str] = Field(default=None, foreign_key="subject.name", primary_key=True)
+    paper_id: Optional[str] = Field(default=None, foreign_key="paper.id", primary_key=True)
+    subject_name: Optional[str] = Field(default=None, foreign_key="subject.name", primary_key=True)
 
 class SubjectMainSubjectLink(SQLModel, table=True):
     subject_name: Optional[str] = Field(default=None, foreign_key="subject.name", primary_key=True)
-    main_subject_name: Optional[str] = Field(default=None, foreign_key="mainsubject.name", primary_key=True)
+    main_subject_name: Optional[str] = Field(
+        default=None, 
+        foreign_key="mainsubject.name", 
+        primary_key=True
+    )
 
 class SubjectParentLink(SQLModel, table=True):
     subject_name: Optional[str] = Field(default=None, foreign_key="subject.name", primary_key=True)
-    parent_subject_name: Optional[str] = Field(default=None, foreign_key="subject.name", primary_key=True)
+    parent_subject_name: Optional[str] = Field(
+        default=None,
+        foreign_key="subject.name",
+        primary_key=True
+    )
 
 # Main Tables
 class MainSubject(SQLModel, table=True):
@@ -85,12 +93,12 @@ class Paper(SQLModel, table=True):
     
 # Database connection
 
-sqlite_file_name = "db/database.db"
-sqlite_url = f"sqlite:///{sqlite_file_name}"
+SQLITE_FILE_NAME = "db/database.db"
+SQLITE_URL = f"sqlite:///{SQLITE_FILE_NAME}"
 
 connect_args = {"check_same_thread": False}
 engine = create_engine(
-        sqlite_url, 
+        SQLITE_URL, 
         echo=True, 
         connect_args=connect_args,
         pool_pre_ping=True

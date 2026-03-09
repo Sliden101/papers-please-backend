@@ -1,10 +1,8 @@
+from typing import Dict, List, Tuple, Optional
+
 import requests
-import json
 import re
-
 from bs4 import BeautifulSoup
-from typing import Dict, List, Any, Tuple, Optional
-
 
 from db import PaperStatus
 
@@ -115,7 +113,6 @@ class ArxivScraper:
             primary_span = subjects_cell.find('span', class_='primary-subject')
             if primary_span:
                 primary_text = primary_span.text.strip()
-                import re
                 match = re.match(r'(.+?)\s*\((.+?)\)', primary_text)
                 if match:
                     full_name = match.group(1).strip()

@@ -1,7 +1,6 @@
+from typing import Dict, List, Tuple
 import requests
-import json
 from bs4 import BeautifulSoup
-from typing import Dict, List, Any, Tuple
 
 ## Subject Scraper
 
