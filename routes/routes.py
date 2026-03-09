@@ -1,14 +1,17 @@
+# pylint: disable=no-member, not-callable
+# pylint: disable=maybe-no-member
+# pylint: disable=unsubscriptable-object
 from typing import Optional, List, Dict, Any
 
 import logging
 
-from fastapi import FastAPI, APIRouter, HTTPException, Query
+from fastapi import APIRouter, HTTPException, Query
 from pydantic import BaseModel, Field
+from sqlmodel import Session, select
+from sqlalchemy import func
 
 from db import Paper as DBPaper, Author, Subject, PaperStatus, engine
 from db import PaperAuthorLink, PaperSubjectLink, PaperManager
-from sqlmodel import Session, select
-from sqlalchemy import func
 
 router = APIRouter()
 
@@ -278,12 +281,12 @@ async def get_stats():
     Get library statistics.
     """
     with Session(engine) as session:
-        total_papers = session.exec(select(func.count()).select_from(DBPaper)).one()
+        total_papers = session.exec(select(func.count(DBPaper.id))).one()
         
         status_counts = {}
         for status in PaperStatus:
             count = session.exec(
-                select(func.count()).where(DBPaper.status == status)
+                select(func.count(DBPaper.id)).where(DBPaper.status == status)
             ).one()
             status_counts[status.value] = count
         

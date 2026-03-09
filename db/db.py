@@ -1,7 +1,7 @@
+import enum
+from typing import Optional, List
 from sqlmodel import Field, Relationship, Session, SQLModel, create_engine, Enum, Column
 from sqlalchemy.types import String
-from typing import Optional, List
-import enum
 
 #Link Tables
 
@@ -112,10 +112,11 @@ def create_db_and_tables() -> bool:
         return True
     except Exception as e:
         print(f"Exception raised {e}")
+        return False
 
 def create_db_session():
     """Gets a database session"""
     try:
         return Session(engine) 
     except Exception as e:
-        print("Exception raised {e}")
+        print(f"Exception raised {e}")

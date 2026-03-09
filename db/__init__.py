@@ -20,7 +20,6 @@ from .db import (
 
     
     # Database engine
-    # Sessio
     engine,
 
     #Enums

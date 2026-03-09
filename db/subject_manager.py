@@ -92,7 +92,14 @@ class SubjectManager:
 
         return main_subject
 
-    def _get_or_create_subject(self, session: Session, name: str, shorthand: str, level: int, main_subject: MainSubject) -> Subject:
+    def _get_or_create_subject(
+            self,
+            session: Session,
+            name: str,
+            shorthand: str,
+            level: int,
+            main_subject: MainSubject
+        ) -> Subject:
         """Get an existing Subject or create a new one."""
 
         subject = session.exec(

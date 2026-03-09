@@ -1,7 +1,7 @@
 from typing import Dict, List, Tuple, Optional
 
-import requests
 import re
+import requests
 from bs4 import BeautifulSoup
 
 from db import PaperStatus

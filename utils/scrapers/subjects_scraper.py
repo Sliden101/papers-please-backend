@@ -99,7 +99,7 @@ def print_hierarchy(hierarchy: Dict[str, Dict[str, List[str]]]):
                     print(f"      - {category_name} ({shorthand})")
                 print(f"    Total categories: {len(categories)}")
             else:
-                print(f"    (No sub-categories)")
+                print("    (No sub-categories)")
             print()
 
 
