@@ -20,20 +20,25 @@ from .db import (
 
     
     # Database engine
+    # Sessio
     engine,
 
     #Enums
     PaperStatus,
 )
 
-from .manager import (
-    DatabaseManager,
+from .subject_manager import (
+    SubjectManager,
 )
 
+from .paper_manager import (
+    PaperManager,
+)
 __all__ = [
     'create_db_and_tables',
     'create_db_session',
-    'DatabaseManager',
+    'SubjectManager',
+    'PaperManager'
     'Paper',
     'Author',
     'Subject',
@@ -46,4 +51,4 @@ __all__ = [
     'PaperStatus',
 ]
 
-__version__ = '1.0.1'
+__version__ = '1.0.2'

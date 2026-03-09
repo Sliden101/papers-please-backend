@@ -1,10 +1,55 @@
-from db import create_db_and_tables, Paper, Author, Subject, DatabaseManager
-from utils.scrapers import scrape_arxiv_subjects_hierarchy
+from db import create_db_and_tables, Paper, Author, Subject, SubjectManager, PaperStatus, PaperManager
+from utils.scrapers import scrape_arxiv_subjects_hierarchy, ArxivScraper
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+import logging
 
-res = scrape_arxiv_subjects_hierarchy()
-
-db_manager = DatabaseManager()
-
-db_manager.add_subjects_hierarchy(res)
+from routes import router
 
 
+def do_shit():
+    res = scrape_arxiv_subjects_hierarchy()
+
+    subject_manager = SubjectManager()
+
+    subject_manager.add_subjects_hierarchy(res)
+
+# main.py
+from fastapi import FastAPI
+from contextlib import asynccontextmanager
+import logging
+
+from db import create_db_and_tables
+from routes import router
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    # Startup
+    logger.info("Starting up...")
+    yield
+    # Shutdown
+    logger.info("Shutting down...")
+
+app = FastAPI(
+    title="Papers Please API",
+    description="API for managing academic papers from arXiv",
+    version="1.0.0",
+    lifespan=lifespan
+)
+
+app.include_router(router, prefix="/api")  # All routes will be under /api/v1
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Papers Please API",
+        "version": "1.0.0",
+        "docs": "/docs",
+        "endpoints": "/api/"
+    }
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}

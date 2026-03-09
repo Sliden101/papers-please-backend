@@ -2,8 +2,8 @@ from sqlmodel import Session, select
 from db import engine, Paper, Author, Subject, MainSubject, SubjectParentLink
 from typing import List, Dict, Tuple
 
-class DatabaseManager:
-    """Manages ALL database operations"""
+class SubjectManager:
+    """Manages subject database operations"""
     def __init__(self):
         self.engine = engine
     

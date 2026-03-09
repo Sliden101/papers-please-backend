@@ -7,8 +7,13 @@ from .subjects_scraper import (
 
 )
 
+from .paper_scraper import (
+     ArxivScraper
+)
+
 __all__ = [
     'scrape_arxiv_subjects_hierarchy'
+    'ArxivScraper'
 ]
 
 __version__ = "1.0.0"

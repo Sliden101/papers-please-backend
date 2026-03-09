@@ -1,4 +1,5 @@
 from sqlmodel import Field, Relationship, Session, SQLModel, create_engine, Enum, Column
+from sqlalchemy.types import String
 from typing import Optional, List
 import enum
 
@@ -78,7 +79,7 @@ class Paper(SQLModel, table=True):
                 type_ = Enum(PaperStatus),
         )
     )
-    note: str = Field(default = None)
+    note: Optional[str] = Field(default = None,sa_column=Column(String, nullable=True))
     authors: List["Author"] = Relationship(back_populates="papers", link_model=PaperAuthorLink)
     subjects: List["Subject"] = Relationship(back_populates="papers", link_model=PaperSubjectLink)
     
