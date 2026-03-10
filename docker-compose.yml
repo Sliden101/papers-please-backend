@@ -1,0 +1,18 @@
+services:
+  api:
+    build: .
+    container_name: papers-please-api
+    restart: always
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///data/database.db
+      - ENVIRONMENT=production
+    volumes:
+      - ./data:/app/data  # Persist SQLite database
+    command: uvicorn main:app --host 0.0.0.0 --port 8000
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3

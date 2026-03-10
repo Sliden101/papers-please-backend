@@ -34,7 +34,7 @@ app.add_middleware(
 )
 
 
-app.include_router(router, prefix="/api")  # All routes will be under /api/v1
+app.include_router(router, prefix="/api")
 
 @app.get("/")
 async def root():
